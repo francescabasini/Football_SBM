@@ -18,11 +18,11 @@
 
 ####################################################################################
 
+#### IMPORTANT: Set THIS as working directory
+
 ## Clean Environment
 rm(list = ls())
 cat("\014")
-
-#### IMPORTANT: Set THIS as working directory
 
 ## Choose Premier Season
 season<-"1718"
