@@ -1,7 +1,7 @@
 # Football_SBM (2021)
 
 This repository contains the data and code associated with the article/preprint by *F. Basini, V. Tsouli, I Ntzoufras, N. Friel*, 
-*"Assessing competitive balance in the English Premier League for over forty seasons using a stochastic block model"* (2021)*, currently deposited in [arXiv?].
+*"Assessing competitive balance in the English Premier League for over forty seasons using a stochastic block model" (2021)*, currently deposited in [arXiv?].
 
 ## Repository structure:  
 
