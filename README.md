@@ -7,7 +7,7 @@ This repository contains the data and code associated with the article/preprint 
 
 * ```README.md``` - you're reading it
 * [/Data_Premier](https://github.com/basins95/Football_SBM/tree/master/Data_Premier) - contains the tables of results (match grids) of the Premier League championship from season 1977/78 to 2019/20 in csv format. e.g. *Result_Premier_0102.csv* for season 2001/02.
- * Note on the data: each csv file contains the results table were entries of the main diagonal are blank
+	* Note on the data: each csv file contains the results table were entries of the main diagonal are blank and the entry of math results is written as | 4~3 | for a match won 4 to 3 by row team against col team, where row team is playing home.
 * [```LABEL_CORRECTION_AND_ANALYSIS.R```](https://github.com/basins95/Football_SBM/blob/master/LABEL_CORRECTION_AND_ANALYSIS.R) - code to apply the label switching algorithm ([collpcm]) and carry out post-hoc analysis of the chain. 
 * [```SBM_FUNCTIONS.R```](https://github.com/basins95/Football_SBM/blob/master/SBM_FUNCTIONS.R) - contains all functions used in the MCMC algorithm. e.g. *get_loglik* returns the collapsed loglikelihood. 
 * [```READ_TABLE_RESULTS.R```](https://github.com/basins95/Football_SBM/blob/master/READ_TABLE_RESULTS.R) - code to load the result table and extract the relational pattern **y**.
