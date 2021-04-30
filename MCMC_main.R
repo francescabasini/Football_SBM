@@ -9,10 +9,10 @@
 #     for over forty seasons using a stochastic block model" (2021)
 #
 
-# The MCMC algorithm is made of the following moves, choosed uniformly at random:
-# (GS move) - Metropolis-within-Gibbs move, one node at time until full sweep,
-#             change Z only
-# (MK move) - Metropolis move, increase or decrease K, leaves Z unchanged.
+# The MCMC algorithm is made of the following moves, choosen uniformly at random:
+# (GS move) - Metropolis-within-Gibbs move, reallocates one node at time until full sweep,
+#             changes Z only
+# (MK move) - Metropolis move, to increase or decrease K, leaves Z unchanged.
 # (AE move) - Metropolis-Hastings move to eject or absorb a cluster,
 #             changes both Z and K. 
 
@@ -54,8 +54,7 @@ beta_0=1
 #Fixing K max 
 K_max=5
 
-#1605 might be a bad initialization
-set.seed(my_seed)
+set.seed(1605)
 
 #random initialization of K and Z
 K_current<-sample.int(n=K_max, size=1)
