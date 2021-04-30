@@ -10,8 +10,6 @@ is.vector(K_seq_burned)
 
 dim(Z_seq_burned)
 
-#library(statnet.common)
-
 ####################################################################################
 ## LABEL CORRECTION
 
@@ -101,9 +99,9 @@ print.xtable(summary_table, type="latex",
 
 # Print Results Table
 ##########################################################
-library(plyr)
 Point_Table<-mapvalues(O, from=c(1,2,3), to=c(3,1,0))
 Reversed_Table<-mapvalues(Point_Table, from=c(3,0), to=c(0,3))
+# Italian tip: "Tabellone" means scoreboard or finale ranking table :) 
 Tabellone<-as.matrix(rowSums(Point_Table, na.rm = TRUE)+
                        colSums(Reversed_Table, na.rm = TRUE))
 
@@ -111,7 +109,7 @@ Ordered_Tabellone<-cbind(sort(Tabellone, decreasing = TRUE))
 rownames(Ordered_Tabellone)<-rownames(Tabellone)[order(Tabellone, decreasing = TRUE)]
 Tabellone_table<-xtable(Ordered_Tabellone, digits = 0)
 print.xtable(Tabellone_table, type="latex", file=paste0(folder_path,
-                                                        "Tabellone_",after_object,".txt"))
+                                                        "Scoreboard_",after_object,".txt"))
 ##########################################################
 
 
