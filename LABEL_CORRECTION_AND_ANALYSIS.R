@@ -74,12 +74,7 @@ pdf(paste0(folder_path, "Ktrue_NF_",after_object,".pdf"),
 plot(Noisy_True_K, col="#00000033",ylab="K", xlab=" ", cex.lab=1.7,
      ylim=c(1,K_maxmax+1), yaxt="n")
 
-if(season ==1920){
-  at_points<-seq(K_minmin-1, K_maxmax-1)+.5
-}else{
-at_points<-seq(K_minmin-1, K_maxmax)+.5
-}
-
+at_points<-seq(1, K_maxmax)+.5
 axis(side=2, at=at_points, labels=1:K_maxmax)
 dev.off() 
 ##########################################################
