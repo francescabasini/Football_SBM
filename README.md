@@ -24,8 +24,8 @@ This repository contains the data and code associated with the article/preprint 
 
 ## Results
 In the associated folder ```/Inference_results/mcmc_Premier_Season_*season*``` that will be created, the following items will be available:
-* ```Heatmap_Season_*season*.pdf``` the match grid of the season with results categorised by colour (See fig. 2 (a) in paper).
-* ```Heatmap_Estimated_Season_*season*.pdf``` the permuted match grid of the season, from *a posteriori* analysis, with teams listed according to the most likely block membership, results categorised by colour (See fig. 2 (b) in paper). 
+* ```Heatmap_Season_*season*.pdf``` the match grid of the season with results categorised by colour (See fig. 4 (a) in paper).
+* ```Heatmap_Estimated_Season_*season*.pdf``` the permuted match grid of the season, from *a posteriori* analysis, with teams listed according to the most likely block membership, results categorised by colour (See fig. 4 (b) in paper). 
 	Plotted and saved only when the MAP for K is larger than 1.
 * ```StackedPlot_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` is the stacked plot of posterior allocations of the teams in the league ordered by the final ranking.
 	* Note: The subtitle will print ```K = *K*```, the biggest number K of non empty clusters found by the algorithm search.
