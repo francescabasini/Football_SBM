@@ -104,7 +104,7 @@ Ordered_Tabellone<-cbind(sort(Tabellone, decreasing = TRUE))
 rownames(Ordered_Tabellone)<-rownames(Tabellone)[order(Tabellone, decreasing = TRUE)]
 Tabellone_table<-xtable(Ordered_Tabellone, digits = 0)
 print.xtable(Tabellone_table, type="latex", file=paste0(folder_path,
-                                                        "Scoreboard_",after_object,".txt"))
+                                                        "FinalTable_",after_object,".txt"))
 ##########################################################
 
 
