@@ -25,7 +25,7 @@ rm(list = ls())
 cat("\014")
 
 ## Choose Premier Season
-season<-"0102"
+season<-"1819"
 
 ####################################################################################
 
@@ -37,6 +37,7 @@ my_seed<-1909
 
 ## READ DATA FROM RESULTS TABLE
 source("READ_TABLE_RESULTS.R")
+
 
 ## Load functions used in the MCMC algorithm
 source("SBM_FUNCTIONS.R")
@@ -464,11 +465,13 @@ table(K_from_labels_burned)
 table(True_K_seq_burned)
 table(True_K_from_Z_burned)
 
+
 ####################################################################################
 ## Label correction and analysis
 
 library(collpcm) # used for label switching algorithm
 source("LABEL_CORRECTION_AND_ANALYSIS.R")
+
 
 ## Save workspace
 save.image(paste0("Inference_results//mcmc_Premier_Season_",season,

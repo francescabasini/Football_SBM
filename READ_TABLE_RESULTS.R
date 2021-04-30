@@ -36,39 +36,9 @@ for(i in 1:N){
 rownames(O)=rownames(Results)
 colnames(O)=colnames(Results)
 
-### ATTEMPT TO VISUALIZE THE NETWORK ####
-
-library(igraph)
-
-m=as.matrix(O)
-net=graph.adjacency(m,mode="directed",weighted=TRUE,diag=FALSE)
-
-plot.igraph(net,vertex.label=V(net)$name,layout=layout.fruchterman.reingold, 
-            edge.color=c("green", "yellow", "red")[E(net)$weight],
-            edge.arrow.size=.1, edge.curved=TRUE)
-#l <-layout.sphere(net)
-#plot(net,layout=l)
-
-###   (VISUALIZE) SAVE HEATMAP FOR RESULTS TABLE
-netm <-get.adjacency(net, attr="weight", sparse=F)
-N<-dim(O)[1]
-netm=netm+diag(NA, N)
-colnames(netm) <-colnames(O)
-rownames(netm) <-colnames(O)
-palf <-colorRampPalette(c("green3", "yellow", "red1"))
-#show it in RStudio
-heatmap(netm, Rowv = NA, Colv = NA, col =palf(100),
-        scale="none", margins=c(10,10), revC = T, main = paste0("Results table season: ", season))
-
-
-pdf(paste0("Inference_results//mcmc_Premier_Season_",season,
-           "//Heatmap_Season_", season,".pdf"),width = 11, height=11)
-heatmap(netm, Rowv = NA, Colv = NA, col =palf(100),
-        scale="none", margins=c(10,10), revC = T,
-        main = paste0("Results table season: ", season))
-dev.off()
 
 ##### BUILDING THE ADJACENCY MATRIX from OUTCOME MATRIX 
+####################################################################################
 
 #Function for the adjacency matrix from O
 to_adjacency<-function(O_matrix){
@@ -104,3 +74,27 @@ O_value=O
 O_value<-ifelse(O==1, "W", ifelse(O==2, "D", "L"))
 
 O_value
+
+
+###   VISUALIZE AND SAVE HEATMAP FOR RESULTS TABLE
+####################################################################################
+library("lattice")
+
+levelplot(t(O[nrow(O):1,]),
+          col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
+          main = paste0("Results table season: ", season), scales = list(alternating=1),
+)
+
+palf <-colorRampPalette(c("green3", "yellow", "red1"))
+
+
+# save it in folder
+pdf(paste0("Inference_results//mcmc_Premier_Season_",season,
+           "//Heatmap_Season_", season,".pdf"),width = 10, height=10)
+
+print(levelplot(t(O[nrow(O):1,]),
+          col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
+          main = paste0("Results table season: ", season), scales = list(alternating=1)))
+
+dev.off()
+####################################################################################

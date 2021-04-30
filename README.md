@@ -25,13 +25,13 @@ This repository contains the data and code associated with the article/preprint 
 ## Results
 In the associated folder ```/Inference_results/mcmc_Premier_Season_*season*``` that will be created, the following items will be available:
 * ```Heatmap_Season_*season*.pdf``` the match grid of the season with results categorised by colour (See fig. 2 (a) in paper).
+	* ```Heatmap_Estimated_Season_*season*.pdf``` the permuted match grid of the season, from *a posteriori* analysis, with results categorised by colour and blocks separated by horizontal and vertical lines (See fig. 2 (b) in paper). 
+	Plotted and saved only when the MAP for K is larger than 1.
 * ```StackedPlot_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` is the stacked plot of posterior allocations of the teams in the league ordered by the final ranking.
+	* Note: The subtitle will print ```K = *K*```, the biggest number K of non empty clusters found by the algorithm search.
 * ```Summary_table_Premier_Season_season_iterk_seed.txt``` is the table of posterior allocations of the teams in the league, in latex table format.
 * ```FinalTable_Premier_Season_*season*_*iter*k_seed_*seed*.txt``` is the final league table for the season, in latex format.
-* ```Ktrue_NF_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` is the traceplot of K as plotted in Nobile and Fearnside (2007).
-* ```Loglik_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` is the traceplot of the collapsed loglikelihood.
-* ```PostDensities_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` contains plots for the kernel densities for posterior allocation in each cluster for each team in the league.
-* ```TrueK_density_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` shows the kernel density of teh posterior of K. 
+* ```Ktrue_NF_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` is the jittered traceplot of K as plotted in Nobile and Fearnside (2007).
 * ```WS_Premier_Season_*season*_*iter*k_seed_*seed*.RData``` the whole workspace is saved at the end of the analysis.
 
 ## Dependencies:
@@ -45,7 +45,7 @@ install.packages("seqinr")
 * #### Plotting: 
 ```
 install.packages("RColorBrewer")
-install.packages("igraph")
+install.packages("lattice")
 ```
 * #### Printing tables in Latex format: 
 ```

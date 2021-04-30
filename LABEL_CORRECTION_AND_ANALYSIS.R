@@ -1,4 +1,4 @@
-#### SCRIPT FOR LABEL SWITCHING CORRECTION AND ANALYSIS
+#### SCRIPT FOR EL SWITCHING CORRECTION AND ANALYSIS
 
 # paths for elements
 folder_path<-paste0("Inference_results//mcmc_Premier_Season_",season,"//")
@@ -44,20 +44,6 @@ for(ii in 1:K_est){
 
 ####################################################################################
 ## ANALYSIS AND PLOTS
-
-## Plotting posterior densities, although continuous here
-############################################################
-pdf(paste0(folder_path, "PostDensities_",after_object,".pdf"),
-      width = 11, height=8.5, paper="USr")
-# 2. Create a plot
-par(mfrow=c(2,3))
-for(i in 1:N){
-  plot(density(Undone_Z_seq[,i]), col=i,
-       main=paste("Posterior allocation density of team", i, colnames(O)[i]))
-}
-# Close the pdf file
-dev.off() 
-##########################################################
 
 
 # Plotting Traceplot for K as in Nobile and Fearnside
@@ -136,24 +122,56 @@ dev.off()
 ##########################################################
 
 
-## Plotting loglikelihood 
+# Some 
 ##########################################################
-pdf(paste0(folder_path, "Loglik_traceplot_",after_object,".pdf"),
-    width = 11, height=8.5, paper="USr")
-plot(log_lik_seq_burned, type="l", main = "Loglikelihood traceplot")
-dev.off()
-##########################################################
+Mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+K_estimated = Mode(True_K_seq_burned)
 
 
-## kernel density of True K
-##########################################################
-True_K_from_Z_burned<-BURN_BABY_BURN(seq_to_burn = True_K_from_Z,
-                                     burn_in_level = burn_in_level,
-                                     maxS=S)
-pdf(paste0(folder_path, "TrueK_density_",after_object,".pdf"),
-    width = 11, height=8.5, paper="USr")
-plot(density(True_K_from_Z_burned), type="l", ylab="K")
-dev.off()
-##########################################################
-
+# VISUALIZE AND SAVE PERMUTED MATCH GRID AFTER ESTIMATING K AND Z
+####################################################################################
+if (K_estimated>1){
+  Winner_label = Team_Names[rownames(Tabellone)[1],][1]
+  
+  Top_block = as.numeric(which.max(Cluster_percentages[,Winner_label]))
+  
+  # Team is in topblock if the posterior allocation is >=0.5
+  Top_block_Teams = as.numeric(which(Cluster_percentages[Top_block,]*100>50))
+  how_many_top = length(Top_block_Teams)
+  
+  all = 1:(dim(O)[1])
+  the_others <- all[!all %in% Top_block_Teams]
+  
+  new_block_order = c(Top_block_Teams, the_others)
+  Reordered_O = O[new_block_order,]
+  Final_O = Reordered_O[,new_block_order]
+  
+  levelplot(t(Final_O[nrow(Final_O):1,]),
+            col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
+            main = paste0("Results table season: ", season), scales = list(alternating=1),
+            panel = function(...){
+              panel.levelplot(...)
+              panel.abline(h = (20-how_many_top)+0.5)
+              panel.abline(v = how_many_top+0.5)
+            })
+  
+  # save it in folder
+  pdf(paste0("Inference_results//mcmc_Premier_Season_",season,
+             "//Heatmap_Estimated_Season_", season,".pdf"),width = 10, height=10)
+  
+  print(levelplot(t(Final_O[nrow(Final_O):1,]),
+                  col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
+                  main = paste0("Esitimated table of season: ", season), scales = list(alternating=1),
+                  panel = function(...){
+                    panel.levelplot(...)
+                    panel.abline(h = (20-how_many_top)+0.5, lw = 2.5)
+                    panel.abline(v = how_many_top+0.5, lw =2.5)
+                  }))
+  
+  dev.off()
+}
 
