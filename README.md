@@ -11,7 +11,7 @@ This repository contains the data and code associated with the article/preprint 
 * [```LABEL_CORRECTION_AND_ANALYSIS.R```](https://github.com/basins95/Football_SBM/blob/master/LABEL_CORRECTION_AND_ANALYSIS.R) - code to apply the label switching algorithm (```collpcm```) and carry out post-hoc analysis of the chain. 
 * [```SBM_FUNCTIONS.R```](https://github.com/basins95/Football_SBM/blob/master/SBM_FUNCTIONS.R) - contains all functions used in the MCMC algorithm. e.g. *get_loglik* returns the collapsed loglikelihood. 
 * [```READ_TABLE_RESULTS.R```](https://github.com/basins95/Football_SBM/blob/master/READ_TABLE_RESULTS.R) - code to load the result table and extract the relational pattern **y**.
-* [```MCMC_main.R```](https://github.com/basins95/Football_SBM/blob/master/MCMC_main.R) - the heart of the whole code which calls the other sources and runs the MCMC algorithm.
+* [```MCMC_main.R```](https://github.com/basins95/Football_SBM/blob/master/MCMC_main.R) - the heart (:heartpulse:) of the whole code which calls the other sources and runs the MCMC algorithm.
 * [/Inference_results](https://github.com/basins95/Football_SBM/tree/master/Inference_results) - now empty, folders for each season analysed will be created inside this folder one the code is run, e.g. [/Inference_results/mcmc_Premier_Season_0102] for season 2001/02.
 
 
