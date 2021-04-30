@@ -27,7 +27,7 @@ In the associated folder ```/Inference_results/mcmc_Premier_Season_*season*``` t
 * ```Heatmap_Season_*season*.pdf``` the match grid of the season with results categorised by colour (See fig. 2 (b) in paper).
 * ```StackedPlot_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` is the stacked plot of posterior allocations of the teams in the league ordered by the final ranking.
 * ```Summary_table_Premier_Season_season_iterk_seed.txt``` is the table of posterior allocations of the teams in the league, in latex table format.
-* ```Tabellone_Premier_Season_*season*_*iter*k_seed_*seed*.txt``` is the final ranking table or scoreboard for the season, in latex format.
+* ```Scoreboard_Premier_Season_*season*_*iter*k_seed_*seed*.txt``` is the final ranking table or scoreboard for the season, in latex format.
 * ```Ktrue_NF_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` is the traceplot of K as plotted in Nobile and Fearnside (2007).
 * ```Loglik_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` is the traceplot of the collapsed loglikelihood.
 * ```PostDensities_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` contains plots for the kernel densities for posterior allocation in each cluster for each team in the league.
