@@ -74,27 +74,3 @@ O_value=O
 O_value<-ifelse(O==1, "W", ifelse(O==2, "D", "L"))
 
 O_value
-
-
-###   VISUALIZE AND SAVE HEATMAP FOR RESULTS TABLE
-####################################################################################
-library("lattice")
-
-levelplot(t(O[nrow(O):1,]),
-          col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
-          main = paste0("Results table season: ", season), scales = list(alternating=1),
-)
-
-palf <-colorRampPalette(c("green3", "yellow", "red1"))
-
-
-# save it in folder
-pdf(paste0("Inference_results//mcmc_Premier_Season_",season,
-           "//Heatmap_Season_", season,".pdf"),width = 10, height=10)
-
-print(levelplot(t(O[nrow(O):1,]),
-          col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
-          main = paste0("Results table season: ", season), scales = list(alternating=1)))
-
-dev.off()
-####################################################################################
