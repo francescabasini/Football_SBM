@@ -6,7 +6,7 @@ This repository contains the data and code associated with the article/preprint 
 ## Repository structure:  
 
 * ```README.md``` - you're reading it
-* [/Data_Premier](https://github.com/basins95/Football_SBM/tree/master/Data_Premier) - contains the tables of results (match grids) of the Premier League championship from season 1977/78 to 2019/20 in csv format. e.g. *Result_Premier_0102.csv* for season 2001/02.
+* [/Data_Premier](https://github.com/basins95/Football_SBM/tree/master/Data_Premier) - contains the tables of results (match grids) of the Premier League championship from season 1978/79 to 2019/20 in csv format. e.g. *Result_Premier_0102.csv* for season 2001/02.
 	* Note on the data: each csv file contains the results table were entries of the main diagonal are blank and the entry of math results is written as | 4~3 | for a match won 4 to 3 by row team against col team, where row team is playing home.
 * [```LABEL_CORRECTION_AND_ANALYSIS.R```](https://github.com/basins95/Football_SBM/blob/master/LABEL_CORRECTION_AND_ANALYSIS.R) - code to apply the label switching algorithm ([collpcm]) and carry out post-hoc analysis of the chain. 
 * [```SBM_FUNCTIONS.R```](https://github.com/basins95/Football_SBM/blob/master/SBM_FUNCTIONS.R) - contains all functions used in the MCMC algorithm. e.g. *get_loglik* returns the collapsed loglikelihood. 
@@ -19,12 +19,12 @@ This repository contains the data and code associated with the article/preprint 
 
 * Clone repository.
 * Open ```MCMC_main.R``` in RStudio and set ```Football_SBM``` as your working directory.
-* In ```line 28``` set ```season``` to the season you want to analyse, e.g. 01/02 for 2001/02. (Provided that it is between 1977/78 and 2019/20)
+* In ```line 28``` set ```season``` to the season you want to analyse, e.g. 01/02 for 2001/02. (Provided that it is between 1978/79 and 2019/20)
 * Run it all.
 
 ## Results
 In the associated folder ```/Inference_results/mcmc_Premier_Season_*season*``` that will be created, the following items will be available:
-* ```Heatmap_Season_*season*.pdf``` the match grid of the season with results categorised by colour (See fig. 2 (b) in paper).
+* ```Heatmap_Season_*season*.pdf``` the match grid of the season with results categorised by colour (See fig. 2 (a) in paper).
 * ```StackedPlot_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` is the stacked plot of posterior allocations of the teams in the league ordered by the final ranking.
 * ```Summary_table_Premier_Season_season_iterk_seed.txt``` is the table of posterior allocations of the teams in the league, in latex table format.
 * ```Scoreboard_Premier_Season_*season*_*iter*k_seed_*seed*.txt``` is the final ranking table or scoreboard for the season, in latex format.
