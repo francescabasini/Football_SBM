@@ -516,7 +516,7 @@ if (K_estimated>1){
   
   levelplot(t(Final_O[nrow(Final_O):1,]),
             col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
-            main = paste0("Results table ordered by block membership for season: : ", season), scales = list(alternating=1),
+            main = paste0("Results table ordered by block membership for season: ", season), scales = list(alternating=1),
             panel = function(...){
               panel.levelplot(...)
               panel.abline(h = (20-how_many_top)+0.5)
@@ -529,7 +529,7 @@ if (K_estimated>1){
   
   print(levelplot(t(Final_O[nrow(Final_O):1,]),
                   col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
-                  main = paste0("Results table ordered by block membership for season: : ", season), scales = list(alternating=1),
+                  main = paste0("Results table ordered by block membership for season: ", season), scales = list(alternating=1),
                   panel = function(...){
                     panel.levelplot(...)
                     panel.abline(h = (20-how_many_top)+0.5, lw = 2.5)
