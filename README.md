@@ -52,6 +52,7 @@ In addition, if you are using ```OVER_TIME_ANALYSIS.R```, there will be one futh
 * ```Size_top_block_table.txt``` the table with size of the estimated top block over each season.
 * ```TopBlock_Size_barplot.pdf``` the barplot showing the value of the size of the estimated top block over each season.
 * ```TopBlock_prob_datapoints_JITTERED.pdf``` the plot of the probability of being in the top block for all teams in the league and over all seasons.
+* [\Over_time_Teams] folder containing the probability of belonging to the top block over each season but focusing on one team at a time (see Fig. 8 of the paper).
 
 ## Dependencies:
 All packages used are available on CRAN.
