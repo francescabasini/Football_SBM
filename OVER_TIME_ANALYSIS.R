@@ -28,6 +28,9 @@ season_numbers = season_numbers[-1]
 
 posterior_list = vector(mode = "list", length = length(season_numbers))
 
+# If you just want to run the analysis but you already have all season's results
+# you can comment out the following 7 lines
+############################################################################
 for(yy in 1:length(season_numbers)){
   season = season_numbers[yy]
   source("MCMC_main.R")
@@ -35,6 +38,7 @@ for(yy in 1:length(season_numbers)){
   rm(list=setdiff(ls(), c("season_numbers","season_labels", "posterior_list")))
   cat("\014")
 }
+############################################################################
 
 
 #new folder path

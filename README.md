@@ -24,6 +24,7 @@ This repository contains the data and code associated with the article/preprint 
 * Run it all.
 
 *Waiting time: about 4 minutes*
+---------------------------------------
 #### To analyse all seasons altogether
 * Open ```OVER_TIME_ANALYSIS.R``` in RStudio and set ```Football_SBM``` as your working directory.
 * Run it all.
