@@ -18,14 +18,16 @@ This repository contains the data and code associated with the article/preprint 
 
 ## Usage
 * Clone repository.
-### To analyse one season at a time
+##### To analyse one season at a time
 * Open ```MCMC_main.R``` in RStudio and set ```Football_SBM``` as your working directory.
 * Uncomment ```line 29``` and set ```season``` to the season you want to analyse, e.g. 01/02 for 2001/02. (Provided that it is between 1978/79 and 2019/20)
 * Run it all.
+
 *Waiting time: about 4 minutes*
-### To analyse all seasons altogether
+##### To analyse all seasons altogether
 * Open ```OVER_TIME_ANALYSIS.R``` in RStudio and set ```Football_SBM``` as your working directory.
 * Run it all.
+
 *Waiting time: about 2 and a half hours*
 
 ## Results
@@ -35,10 +37,12 @@ In the associated folder ```/Inference_results/mcmc_Premier_Season_*season*``` t
 * ```Heatmap_Estimated_Season_*season*.pdf``` the permuted match grid of the season, from *a posteriori* analysis, with teams listed according to the most likely block membership, results categorised by colour (See fig. 4 (b) in paper). 
 	Plotted and saved only when the MAP for K is larger than 1.
 * ```Ktrue_NF_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` is the jittered traceplot of K as plotted in Nobile and Fearnside (2007).
+
 For each value of K (number of clusters) predicted:
 * ```Summary_table_Premier_Season_season_iterk_seed.txt``` is the table of posterior allocations of the teams in the league, in latex table format.
 * ```StackedPlot_Premier_Season_*season*_*iter*k_seed_*seed*.pdf``` is the stacked plot of posterior allocations of the teams in the league ordered by the final ranking to the associated Summary_table.
 	* Note: The subtitle will print ```K = *K*```, the biggest number K of non empty clusters found by the algorithm search.
+	
 Also:
 * ```WS_Premier_Season_*season*_*iter*k_seed_*seed*.RData``` the whole workspace is saved at the end of the analysis.
 
