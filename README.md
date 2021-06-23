@@ -18,13 +18,13 @@ This repository contains the data and code associated with the article/preprint 
 
 ## Usage
 * Clone repository.
-##### To analyse one season at a time
+#### To analyse one season at a time
 * Open ```MCMC_main.R``` in RStudio and set ```Football_SBM``` as your working directory.
 * Uncomment ```line 29``` and set ```season``` to the season you want to analyse, e.g. 01/02 for 2001/02. (Provided that it is between 1978/79 and 2019/20)
 * Run it all.
 
 *Waiting time: about 4 minutes*
-##### To analyse all seasons altogether
+#### To analyse all seasons altogether
 * Open ```OVER_TIME_ANALYSIS.R``` in RStudio and set ```Football_SBM``` as your working directory.
 * Run it all.
 
@@ -45,6 +45,13 @@ For each value of K (number of clusters) predicted:
 	
 Also:
 * ```WS_Premier_Season_*season*_*iter*k_seed_*seed*.RData``` the whole workspace is saved at the end of the analysis.
+
+In addition, if you are using ```OVER_TIME_ANALYSIS.R```, there will be one futher directory ```mcmc_Premier_OVER_TIME_ANALYSIS```, which will contain:
+* ```mcmc_Premier_OVER_TIME.RData``` the workspace regarding the over time analysis.
+* ```Posterior_K_table_OVER_TIME.txt``` the table with posterior probability of K over each season.
+* ```Size_top_block_table.txt``` the table with size of the estimated top block over each season.
+* ```TopBlock_Size_barplot.pdf``` the barplot showing the value of the size of the estimated top block over each season.
+* ```TopBlock_prob_datapoints_JITTERED.pdf``` the plot of the probability of being in the top block for all teams in the league and over all seasons.
 
 ## Dependencies:
 All packages used are available on CRAN.
