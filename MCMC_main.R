@@ -19,14 +19,15 @@
 ####################################################################################
 
 #### IMPORTANT: Set THIS as working directory
+#### Uncomment line29 if you want to run it for only one season
 
 ## Clean Environment
-rm(list = ls())
-cat("\014")
+#rm(list = ls())
+#cat("\014")
 
 ## Choose Premier Season
-season<-"0102"
-
+#season<-"0910"
+  
 ####################################################################################
 
 #Create directory inside Inference_results for the selected season
@@ -41,14 +42,12 @@ source("READ_TABLE_RESULTS.R")
 ###   VISUALIZE AND SAVE HEATMAP FOR RESULTS TABLE
 ####################################################################################
 library("lattice")
+palf <-colorRampPalette(c("green3", "yellow", "red1"))
 
 levelplot(t(O[nrow(O):1,]),
           col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
           main = paste0("Results table season: ", season), scales = list(alternating=1),
 )
-
-palf <-colorRampPalette(c("green3", "yellow", "red1"))
-
 
 # save it in folder
 pdf(paste0("Inference_results//mcmc_Premier_Season_",season,
@@ -496,15 +495,19 @@ table(True_K_from_Z_burned)
 library(collpcm) # used for label switching algorithm
 source("LABEL_CORRECTION_AND_ANALYSIS.R")
 
+
 # VISUALIZE AND SAVE PERMUTED MATCH GRID AFTER ESTIMATING K AND Z
 ####################################################################################
 if (K_estimated>1){
-  Winner_label = Team_Names[rownames(Tabellone)[1],][1]
+  Winner_label = Team_Names[rownames(Ordered_Tabellone)[1],][1]
+  # select cluster percentages
+  Cluster_percentages = get(paste0("Cluster_Percentages_Model", 
+                                                         K_estimated))
   
   Top_block = as.numeric(which.max(Cluster_percentages[,Winner_label]))
   
   # Team is in topblock if the posterior allocation is >=0.5
-  Top_block_Teams = as.numeric(which(Cluster_percentages[Top_block,]*100>50))
+  Top_block_Teams = as.numeric(which(Cluster_percentages[Top_block,]>50))
   how_many_top = length(Top_block_Teams)
   
   all = 1:(dim(O)[1])
