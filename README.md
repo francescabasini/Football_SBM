@@ -23,16 +23,19 @@ This repository contains the data and code associated with the article/preprint 
 * Open ```MCMC_main.R``` in RStudio and set ```Football_SBM``` as your working directory.
 * Uncomment ```line 29``` and set ```season``` to the season you want to analyse, e.g. 01/02 for 2001/02. (Provided that it is between 1978/79 and 2019/20)
 * Run it all.
----------------------------------------
 *Waiting time: about 4 minutes*
+
+---------------------------------------
 
 
 #### To analyse all seasons altogether
 ---------------------------------------
 * Open ```OVER_TIME_ANALYSIS.R``` in RStudio and set ```Football_SBM``` as your working directory.
 * Run it all.
----------------------------------------
 *Waiting time: about 2 and a half hours*
+
+---------------------------------------
+
 
 ## Results
 In the associated folder ```/Inference_results/mcmc_Premier_Season_*season*``` that will be created, the following items will be available:
