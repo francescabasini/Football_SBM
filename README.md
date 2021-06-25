@@ -68,15 +68,17 @@ In the associated folder ```/Inference_results/mcmc_Premier_Season_*season*``` t
 		</tr>
 		<tr>
 								 <td colspan = "2"> <li> <code>Summary_table_Premier_Season_season_iterk_seed.txt </code><br> is the table of posterior allocations of the teams in the league, in latex table format.
+								 <p align="center">
 								  <img src="ReadMe_pics/Summary_tables.jpg" centewidth="60%"/>
+									</p>
 									</ td>    
 		</tr>
 		<tr>
 								 <td colspan = "2"> <li> <code>StackedPlot_Premier_Season_*season*_*iter*k_seed_*seed*.pdf</code> <br>is the stacked plot of posterior allocations of the teams in the league ordered by the final ranking to the associated Summary_table.
-								 <p float="left">
-									 <img src="ReadMe_pics/StackedPlot_K2Premier_Season_1819_200k_seed1909.png" width="33%" />
-									 <img src="ReadMe_pics/StackedPlot_K3Premier_Season_1819_200k_seed1909.png" width="33%" />
-									 <img src="ReadMe_pics/StackedPlot_K4Premier_Season_1819_200k_seed1909.png" width="33%" />
+								 <p align="center" float="left">
+									 <img src="ReadMe_pics/StackedPlot_K2Premier_Season_1819_200k_seed1909.png" width="30%" />
+									 <img src="ReadMe_pics/StackedPlot_K3Premier_Season_1819_200k_seed1909.png" width="30%" />
+									 <img src="ReadMe_pics/StackedPlot_K4Premier_Season_1819_200k_seed1909.png" width="30%" />
 								 </p>
 									</ td>    
 		</tr>
@@ -102,11 +104,11 @@ In addition, if you are using ```OVER_TIME_ANALYSIS.R```, there will be one futh
 <p align="center">
 <img src="ReadMe_pics/TopBlock_prob_datapoints_JITTERED.png" width="70%" />
 </p>
-
-* [\Over_time_Teams] folder containing the probability of belonging to the top block over each season but focusing on one team at a time (see Fig. 8 of the paper). Below we provide an example for Manchester City:
+* ```\Over_time_Teams``` folder containing the probability of belonging to the top block over each season but focusing on one team at a time (see Fig. 8 of the paper). Below we provide an example for Manchester City:
 <p align="center">
 <img src="ReadMe_pics/MCI_Top_block_over_time.png" width="70%" />
 </p>
+
 ## Dependencies:
 All packages used are available on CRAN.
 * #### Data wrangling:
