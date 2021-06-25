@@ -90,21 +90,21 @@ In the associated folder ```/Inference_results/mcmc_Premier_Season_*season*``` t
 
 
 In addition, if you are using ```OVER_TIME_ANALYSIS.R```, there will be one futher directory ```mcmc_Premier_OVER_TIME_ANALYSIS```, which will contain:
-* ```mcmc_Premier_OVER_TIME.RData``` the workspace regarding the over time analysis.
-* ```Posterior_K_table_OVER_TIME.txt``` the table with posterior probability of K over each season.
+* <code>mcmc_Premier_OVER_TIME.RData</code> the workspace regarding the over time analysis.
+* <code>Posterior_K_table_OVER_TIME.txt</code> the table with posterior probability of K over each season.
 <p align="center">
 <img src="ReadMe_pics/Posterior_k_over.jpg" align = center width="70%" />
 </p>
-* ```Size_top_block_table.txt``` the table with size of the estimated top block over each season.
-* ```TopBlock_Size_barplot.pdf``` the barplot showing the value of the size of the estimated top block over each season.
+* <code>Size_top_block_table.txt</code> the table with size of the estimated top block over each season.
+* <code>TopBlock_Size_barplot.pdf</code> the barplot showing the value of the size of the estimated top block over each season.
 <p align="center">
 <img src="ReadMe_pics/TopBlock_Size_barplot_withNO.png" align = center width="70%" />
 </p>
-* ```TopBlock_prob_datapoints_JITTERED.pdf``` the plot of the probability of being in the top block for all teams in the league and over all seasons.
+* <code>TopBlock_prob_datapoints_JITTERED.pdf</code> the plot of the probability of being in the top block for all teams in the league and over all seasons.
 <p align="center">
 <img src="ReadMe_pics/TopBlock_prob_datapoints_JITTERED.png" width="70%" />
 </p>
-* ```\Over_time_Teams``` folder containing the probability of belonging to the top block over each season but focusing on one team at a time (see Fig. 8 of the paper). Below we provide an example for Manchester City:
+* <code>\Over_time_Teams</code> folder containing the probability of belonging to the top block over each season but focusing on one team at a time (see Fig. 8 of the paper). Below we provide an example for Manchester City:
 <p align="center">
 <img src="ReadMe_pics/MCI_Top_block_over_time.png" width="70%" />
 </p>
