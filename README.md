@@ -21,7 +21,10 @@ This repository contains the data and code associated with the article/preprint 
 #### To analyse one season at a time
 ---------------------------------------
 * Open ```MCMC_main.R``` in RStudio and set ```Football_SBM``` as your working directory.
-* Uncomment ```line 29``` and set ```season``` to the season you want to analyse, e.g. 01/02 for 2001/02. (Provided that it is between 1978/79 and 2019/20)
+* Uncomment ```line 29``` and set ```season``` to the season you want to analyse using the last two digits of each year, e.g. "1819" for 2018/19. (Provided that it is between 1978/79 and 2019/20)
+``` r
+season = "1819"
+```
 * Run it all.
 *Waiting time: about 4 minutes*
 
@@ -40,6 +43,7 @@ This repository contains the data and code associated with the article/preprint 
 ## Results
 In the associated folder ```/Inference_results/mcmc_Premier_Season_*season*``` that will be created, the following items will be available:
 * ```FinalTable_Premier_Season_*season*_*iter*k_seed_*seed*.txt``` is the final league table for the season, in latex format.
+<img src="ReadMe_pics/Final_table.jpg" width="100%" />
 * ```Heatmap_Season_*season*.pdf``` the match grid of the season with results categorised by colour (See fig. 4 (a) in paper).
 * ```Heatmap_Estimated_Season_*season*.pdf``` the permuted match grid of the season, from *a posteriori* analysis, with teams listed according to the most likely block membership, results categorised by colour (See fig. 4 (b) in paper). 
 	Plotted and saved only when the MAP for K is larger than 1.
