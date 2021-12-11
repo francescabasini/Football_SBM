@@ -49,19 +49,19 @@ In the associated folder ```/Inference_results/mcmc_Premier_Season_*season*``` t
 	 </tr>
 	 <tr> 	
 	 							<td> <li><code>FinalTable_Premier_Season_*season*_*iter*k_seed_*seed*.txt</code><br> is the final league table for the season, in latex format. </td>
-								<td> <img src="ReadMe_pics/Final_table.jpg" width="100%" />  </td>
+								<td> <img src="ReadMe_pics/Final_table_2021.jpg" width="100%" />  </td>
 	 </tr>
 	 <tr> 	
 	 							<td> <li><code>Heatmap_Season_*season*.pdf</code><br> the match grid of the season with results categorised by colour. </td>
-								<td> <img src="ReadMe_pics/Heatmap_Season_1819.png" width="100%" />  </td>
+								<td> <img src="ReadMe_pics/Heatmap_Season_2021.png" width="100%" />  </td>
 	 </tr>
 	 <tr> 	
 	 							<td> <li><code>Heatmap_Estimated_Season_*season*.pdf</code><br> the permuted match grid of the season, from *a posteriori* analysis, with teams listed according to the most likely block membership, results categorised by colour. This file is saved only when the MAP for K is larger than 1. </td>
-								<td> <img src="ReadMe_pics/Heatmap_Estimated_Season_1819.png" width="100%" />  </td>
+								<td> <img src="ReadMe_pics/Heatmap_Estimated_Season_2021.png" width="100%" />  </td>
 	 </tr>
 	 <tr> 	
 	 							<td> <li><code>Ktrue_NF_Premier_Season_*season*_*iter*k_seed_*seed*.pdf </code><bt> is the jittered traceplot of K as plotted in Nobile and Fearnside (2007). </td>
-								<td>  <img src="ReadMe_pics/Ktrue_NF_Premier_Season_1819_200k_seed1909.png" width="100%" />  </td>
+								<td>  <img src="ReadMe_pics/Ktrue_NF_Premier_Season_2021_200k_seed1909.png" width="100%" />  </td>
 	 </tr>
 		<tr>
 								 <td colspan = "1"> For each value of K (number of clusters) predicted:</ td>    
@@ -69,16 +69,16 @@ In the associated folder ```/Inference_results/mcmc_Premier_Season_*season*``` t
 		<tr>
 								 <td colspan = "2"> <li> <code>Summary_table_Premier_Season_season_iterk_seed.txt </code><br> is the table of posterior allocations of the teams in the league, in latex table format.
 								 <p align="center">
-								  <img src="ReadMe_pics/Summary_tables.jpg" centewidth="60%"/>
+								  <img src="ReadMe_pics/Summary_tables_2021.jpg" centewidth="60%"/>
 									</p>
 									</ td>    
 		</tr>
 		<tr>
 								 <td colspan = "2"> <li> <code>StackedPlot_Premier_Season_*season*_*iter*k_seed_*seed*.pdf</code> <br>is the stacked plot of posterior allocations of the teams in the league ordered by the final ranking to the associated Summary_table.
 								 <p align="center" float="left">
-									 <img src="ReadMe_pics/StackedPlot_K2Premier_Season_1819_200k_seed1909.png" width="30%" />
-									 <img src="ReadMe_pics/StackedPlot_K3Premier_Season_1819_200k_seed1909.png" width="30%" />
-									 <img src="ReadMe_pics/StackedPlot_K4Premier_Season_1819_200k_seed1909.png" width="30%" />
+									 <img src="ReadMe_pics/StackedPlot_K2Premier_Season_2021_200k_seed1909.png" width="30%" />
+									 <img src="ReadMe_pics/StackedPlot_K3Premier_Season_2021_200k_seed1909.png" width="30%" />
+									 <img src="ReadMe_pics/StackedPlot_K4Premier_Season_2021_200k_seed1909.png" width="30%" />
 								 </p>
 									</ td>    
 		</tr>
@@ -98,15 +98,15 @@ In addition, if you are using ```OVER_TIME_ANALYSIS.R```, there will be one futh
 * <code>Size_top_block_table.txt</code> the table with size of the estimated top block over each season.
 * <code>TopBlock_Size_barplot.pdf</code> the barplot showing the value of the size of the estimated top block over each season.
 <p align="center">
-<img src="ReadMe_pics/TopBlock_Size_barplot_withNO.png" align = center width="70%" />
+<img src="ReadMe_pics/TopBlock_Size_barplot_greyscale_noTitle.png" align = center width="70%" />
 </p>
 * <code>TopBlock_prob_datapoints_JITTERED.pdf</code> the plot of the probability of being in the top block for all teams in the league and over all seasons.
 <p align="center">
-<img src="ReadMe_pics/TopBlock_prob_datapoints_JITTERED.png" width="70%" />
+<img src="ReadMe_pics/TopBlock_prob_datapoints_JITTERED_greyscale_noTitle.png" width="70%" />
 </p>
 * <code>\Over_time_Teams</code> folder containing the probability of belonging to the top block over each season but focusing on one team at a time (see Fig. 8 of the paper). Below we provide an example for Manchester City:
 <p align="center">
-<img src="ReadMe_pics/MCI_Top_block_over_time.png" width="70%" />
+<img src="ReadMe_pics/MCI_Top_block_over_time_greyscale.png" width="70%" />
 </p>
 
 ## Dependencies:

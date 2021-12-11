@@ -4,7 +4,7 @@
 
 # RUN THE ANALYSIS FOR ALL SEASONS IN THE DATA FOLDER
 ####################################################################################
-years = c(78:99, 0:20)
+years = c(78:99, 0:21) # now 21 because of the new season addition
 season_labels = c(0)
 season_numbers = c(0)
 for(yy in 1:(length(years)-1)){
@@ -17,6 +17,22 @@ for(yy in 1:(length(years)-1)){
     year2= as.character(paste0("0",year2))
   }
   season<-paste0(year1, year2) 
+  # moving this line up here
+  
+  # new line 2/12/2021
+  # adjust for labels to include 4 figures
+  
+  if((year1)>20){
+    year1<-as.character(paste0("19",year1))
+  }else{
+    year1<-as.character(paste0("20",year1))
+  }
+  if((year2)==0){
+    year2
+    year2<-as.character(paste0("200",year2))
+  }
+  #
+  
   season_lab = paste0(year1, "/",year2) 
   
   season_numbers = append(season_numbers, season)
@@ -26,18 +42,33 @@ for(yy in 1:(length(years)-1)){
 season_labels = season_labels[-1]
 season_numbers = season_numbers[-1]
 
+updated_season_labels = season_labels
+updated_season_numbers = season_numbers
+
 posterior_list = vector(mode = "list", length = length(season_numbers))
 
 # If you just want to run the analysis but you already have all season's results
-# you can comment out the following 7 lines
+# you can put TRUE to the following code line, else put FALSE and run the analyses
 ############################################################################
-for(yy in 1:length(season_numbers)){
-  season = season_numbers[yy]
-  source("MCMC_main.R")
+# 2/12/21
+all_seasons = FALSE
+
+for(yy in 1:length(updated_season_numbers)){
+  season = updated_season_numbers[yy]
+  if (all_seasons){
+    load(paste0("Inference_results//mcmc_Premier_Season_",season,
+                "//WS_Premier_Season_",season,"_200k_seed_1909.RData"))
+  }else{
+    source("MCMC_main.R")
+    
+  }
   posterior_list[[yy]] = posterior_k
-  rm(list=setdiff(ls(), c("season_numbers","season_labels", "posterior_list")))
-  cat("\014")
+  rm(list=setdiff(ls(), c("updated_season_labels","updated_season_numbers", "posterior_list", "all_seasons")))
+  #cat("\014")
 }
+
+season_labels = updated_season_labels
+season_numbers = updated_season_numbers
 ############################################################################
 
 
@@ -103,6 +134,9 @@ for (yy in 1:length(season_numbers)){
   load(paste0("Inference_results//mcmc_Premier_Season_",season,
               "//WS_Premier_Season_", season, "_", (S-burn_in_level)/1000,
               "k_seed_",my_seed,".RData"))
+  # adjust labels
+  season_numbers = updated_season_numbers
+  season_labels = updated_season_labels
   #------------------
   # Computing P(top)
   max_k_season = length(posterior_k)
@@ -126,19 +160,43 @@ for (yy in 1:length(season_numbers)){
 }
 ####################################################################################
 
-
 # Probability of Top block for each Championship Over time (Figure 6)
 ####################################################################################
-balance_or_not = apply(posterior_k_matrix, MARGIN = 1, FUN = function(x) which.max(x))
-colour_bean = ifelse(balance_or_not==1, "navajowhite2", "#B0E0E6")
+greyscale_plot = TRUE
+put_title = FALSE
 
-pdf(paste0(folder_path_OVER, "//TopBlock_prob_datapoints_JITTERED.pdf"), width = 20, height=10)
+balance_or_not = apply(posterior_k_matrix, MARGIN = 1, FUN = function(x) which.max(x))
+if (greyscale_plot){
+  colour_bean = ifelse(balance_or_not==1, "white", "azure4")
+  if (put_title){
+    pdf(paste0(folder_path_OVER, "//TopBlock_prob_datapoints_JITTERED_greyscale.pdf"), width = 20, height=10)
+  }else{
+    pdf(paste0(folder_path_OVER, "//TopBlock_prob_datapoints_JITTERED_greyscale_noTitle.pdf"), width = 20, height=10) 
+  }
+  
+}else{
+  colour_bean = ifelse(balance_or_not==1, "navajowhite2", "#B0E0E6")
+  if (put_title){
+    pdf(paste0(folder_path_OVER, "//TopBlock_prob_datapoints_JITTERED.pdf"), width = 20, height=10)
+  }else{
+    pdf(paste0(folder_path_OVER, "//TopBlock_prob_datapoints_JITTERED_noTitle.pdf"), width = 20, height=10)
+  }
+}
 
 season_points = c(1:length(season_numbers))
-plot(season_points,rep(c(0,1),length(season_points)/2), "n", xact = NULL, xlab = "Season", ylab = "P(top block)",
-     main = "Posterior probabilities of belonging to the top block over time", 
-     cex.main = 1.9,xaxt="n", las = 1, cex.axis = 1.2, cex.lab = 1.4)
-axis(1, at=1:length(season_numbers), labels=season_labels, cex.axis = 1.1)
+par(mar=c(5,10,4,1)+.1)
+if ((length(season_points) %% 2) == 0){
+  plot(season_points,rep(c(0,1),length(season_points)/2), "n", xact = NULL, xlab = "Season", ylab = " ",
+       cex.main = 3,xaxt="n", las = 1, cex.axis = 2, cex.lab = 2)
+}else{
+  plot(season_points,c(rep(c(0,1),length(season_points)/2), 0), "n", xact = NULL, xlab = "Season", ylab = " ",
+       cex.main = 3,xaxt="n", las = 1, cex.axis = 2, cex.lab = 2)
+}
+if (put_title)
+title("Posterior probabilities of belonging to the top block over time")
+title(ylab = "P(top block)", cex.lab = 2.5,
+      line = 4)
+axis(1, at=1:length(season_numbers), labels=season_labels, cex.axis = 2)
 for (yy in 1:length(season_numbers)){
   season = season_numbers[yy]
   current_p_top = get(paste0("P_top_block_season", season))/100
@@ -153,7 +211,7 @@ for (yy in 1:length(season_numbers)){
 dev.off()
 
 
-# Table for number of teams in top block
+# Table for number of teams in top block (Figure 6)
 ####################################################################################
 how_many_on_top = rep(NA, length(season_numbers))
 for (yy in 1:length(season_numbers)){
@@ -164,13 +222,32 @@ for (yy in 1:length(season_numbers)){
 }
 
 # Print
-pdf(paste0(folder_path_OVER, "//TopBlock_Size_barplot.pdf"), width = 20, height=10)
-bp  =barplot(how_many_on_top, main= "Size of top block over seasons", xlab = "Season",
-             ylab= "Number of teams in top block", col = colour_bean, ylim = c(0, max(how_many_on_top)+1.5))
+if (greyscale_plot){
+  if (put_title){
+    pdf(paste0(folder_path_OVER, "//TopBlock_Size_barplot_greyscale.pdf"), width = 20, height=10)
+  }else{
+    pdf(paste0(folder_path_OVER, "//TopBlock_Size_barplot_greyscale_noTitle.pdf"), width = 20, height=10)
+  }
+}else{
+  if (put_title){
+    pdf(paste0(folder_path_OVER, "//TopBlock_Size_barplot.pdf"), width = 20, height=10)
+  }else{
+    pdf(paste0(folder_path_OVER, "//TopBlock_Size_barplot_noTitle.pdf"), width = 20, height=10)
+  }
+}
+
+par(mar = c(5,9,4,2) + 0.1) ## default is c(5,4,4,2) + 0.1
+bp  =barplot(how_many_on_top, xlab = "Season",
+              col = colour_bean, ylim = c(0, max(how_many_on_top)+1.5),
+             cex.main = 3,xaxt="n", las = 1, cex.axis = 2, cex.lab = 2.5, yline = 5)
+if (put_title){
+title(main= "Size of top block over seasons")}
+title(ylab = "Number of teams in top block", cex.lab = 2.5,
+      line = 4)
 grid(nx=NA, ny=NULL)
-axis(1, at=bp, labels=season_labels, cex.axis = 1.1)
+axis(1, at=bp, labels=season_labels, cex.axis = 2)
 # Add numbers
-#text(x = bp, y = how_many_on_top, label = how_many_on_top, pos = 3, cex = 0.8, col = "black")
+text(x = bp, y = how_many_on_top, label = how_many_on_top, pos = 3, cex = 2, col = "black")
 dev.off()
 ####################################################################################
 
@@ -221,7 +298,7 @@ colnames(Team_prob_over_time) = season_labels
 row.names(Team_prob_over_time) = All_teams_labs
 
 
-# PLOTTING P(TOP BLOCK) OVER TIME FOR EACH TEAM
+# PLOTTING P(TOP BLOCK) OVER TIME FOR EACH TEAM - Together making Figure 8
 ####################################################################################
 xleft_team<-c(1:length(season_labels)-0.5)
 ybottom_team<-rep(0, length(xleft_team))
@@ -229,34 +306,69 @@ xright_team<-c(2:(length(season_labels)+1)-0.5)
 ytop_BALANCE<-ifelse(balance_or_not==1, 1.05, 0)
 ytop_UNBALANCE<-ifelse(balance_or_not!=1, 1.05, 0)
 
+## 2/12/21 - creating a parameter for greyscale
+
+greyscale_plot = TRUE
+
 # Creating a separate directory inside "OVER TIME" for all the figures for each team
 folder_path_OVER_for_TEAMS = paste0(folder_path_OVER, "//Over_time_Teams")
 dir.create(folder_path_OVER_for_TEAMS)
 
 for(tt in 1:length(All_teams_labs)){
   current_team = row.names(Team_prob_over_time)[tt]
-  pdf(paste0(folder_path_OVER_for_TEAMS,"//",current_team ,"_Top_block_over_time.pdf"),
-      width = 15, height=8)
+  if (greyscale_plot){
+    pdf(paste0(folder_path_OVER_for_TEAMS,"//",current_team ,"_Top_block_over_time_greyscale.pdf"),
+        width = 15, height=8)
+  }else{
+    pdf(paste0(folder_path_OVER_for_TEAMS,"//",current_team ,"_Top_block_over_time.pdf"),
+        width = 15, height=8)
+  }
   # p(top) for team tt
   pp_top_team_over_time = Team_prob_over_time[tt, ]
-  plot(pp_top_team_over_time, pch=19,ylim=c(0,1), ylab="Pr(strong cluster)",
-       main=current_team, xaxt = "n",
-       xlab=c("Season"), col=ifelse(pp_top_team_over_time>=0.5,"purple", "chocolate1"), yaxt = "n", cex=1)
-  axis(1, at=seq(2,length(season_labels),by=3), labels=season_labels[seq(2, length(season_labels), by=3)])
-  axis(2, at=seq(0,1, by=0.2), labels=seq(0,1, by=0.2))
+  par(mar = c(5,7,4,2) + 0.1) ## default is c(5,4,4,2) + 0.1
+  
+  if (greyscale_plot){
+    plot(pp_top_team_over_time, pch=19,ylim=c(0,1),
+         main=current_team, xaxt = "n", ylab = " ",
+         xlab=c("Season"), col=ifelse(pp_top_team_over_time>=0.5,"black", "white"), yaxt = "n", cex=1,
+         cex.lab = 2.5)
+  }else{
+    plot(pp_top_team_over_time, pch=19,ylim=c(0,1),
+         main=current_team, xaxt = "n", ylab = " ",
+         xlab=c("Season"), col=ifelse(pp_top_team_over_time>=0.5,"purple", "chocolate1"), yaxt = "n", cex=1,
+         cex.lab = 2.5)
+  }
+  title(ylab = "Pr(strong cluster)", cex.lab = 2.5,
+        line = 3)
+  axis(1, at=seq(2,length(season_labels),by=3), labels=season_labels[seq(2, length(season_labels), by=3)],
+       cex.axis = 2)
+  axis(2, at=seq(0,1, by=0.2), labels=seq(0,1, by=0.2),
+       cex.axis = 2)
   # Adding balance bars
-  rect(xleft=xleft_team, ybottom=ybottom_team, xright=xright_team,
-       ytop=ytop_BALANCE, col="navajowhite2", border=NA,density=400)
-  rect(xleft=xleft_team, ybottom=ybottom_team, xright=xright_team,
-       ytop=ytop_UNBALANCE, col="#B0E0E6", border=NA,density=400)
+  if (greyscale_plot){
+    rect(xleft=xleft_team, ybottom=ybottom_team, xright=xright_team,
+         ytop=ytop_BALANCE, col="white", border=NA,density=400)
+    rect(xleft=xleft_team, ybottom=ybottom_team, xright=xright_team,
+         ytop=ytop_UNBALANCE, col="azure4", border=NA,density=400)
+  }else{
+    rect(xleft=xleft_team, ybottom=ybottom_team, xright=xright_team,
+         ytop=ytop_BALANCE, col="navajowhite2", border=NA,density=400)
+    rect(xleft=xleft_team, ybottom=ybottom_team, xright=xright_team,
+         ytop=ytop_UNBALANCE, col="#B0E0E6", border=NA,density=400)
+  }
   #
   for(yy in 1:length(season_labels)){
     if(!(is.na(pp_top_team_over_time[yy])))
       segments(x0=yy, y0=0, x1=yy,
                y1=pp_top_team_over_time[yy], lwd = 3.5) 
   }
-  points(pp_top_team_over_time, col = "black",bg=ifelse(pp_top_team_over_time>=0.5,"purple", "chocolate1"),
-         cex = 4.5, pch =21)
+  if (greyscale_plot){
+    points(pp_top_team_over_time, col = "black",bg=ifelse(pp_top_team_over_time>=0.5,"black", "white"),
+           cex = 4.5, pch =21)
+  }else{
+    points(pp_top_team_over_time, col = "black",bg=ifelse(pp_top_team_over_time>=0.5,"purple", "chocolate1"),
+           cex = 4.5, pch =21)
+  }
   dev.off()
 }
 
@@ -265,9 +377,9 @@ for(tt in 1:length(All_teams_labs)){
 save.image(paste0(folder_path_OVER, "//mcmc_Premier_OVER_TIME.RData"))
 
 
-# Print P(Top block) as xtable for season 18/19 (Paper)
+# Print P(Top block) as xtable for season 18/19 (Paper) --> Now 20/21
 ####################################################################################
-# print.xtable(xtable(t(P_top_block_season1819)), type="latex", file=paste0("Inference_results",
-#                                                                  "//P_top_block_1819.txt"))
-
+# print.xtable(xtable(t(P_top_block_season2021)), type="latex", file=paste0("Inference_results",
+#                                                                   "//P_top_block_2021.txt"))
+ 
 
