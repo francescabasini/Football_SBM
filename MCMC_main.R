@@ -44,10 +44,12 @@ source("READ_TABLE_RESULTS.R")
 library("lattice")
 palf <-colorRampPalette(c("green3", "yellow", "red1"))
 
-levelplot(t(O[nrow(O):1,]),
-          col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
-          main = paste0("Results table season: ", season), scales = list(alternating=1),
-)
+print(levelplot(t(O[nrow(O):1,]),
+                col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
+                main =  list(label=paste0("Results table season: ", season), cex=2.4),
+                scales = list(list(alternating=1), x=list(cex=1),y=list(cex=1.4)),
+))
+
 
 # save it in folder
 pdf(paste0("Inference_results//mcmc_Premier_Season_",season,
@@ -55,7 +57,9 @@ pdf(paste0("Inference_results//mcmc_Premier_Season_",season,
 
 print(levelplot(t(O[nrow(O):1,]),
                 col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
-                main = paste0("Results table season: ", season), scales = list(alternating=1)))
+                main =  list(label=paste0("Results table season: ", season), cex=2.4),
+                scales = list(list(alternating=1), x=list(cex=1),y=list(cex=1.4)),
+                ))
 
 dev.off()
 ####################################################################################
@@ -517,14 +521,16 @@ if (K_estimated>1){
   Reordered_O = O[new_block_order,]
   Final_O = Reordered_O[,new_block_order]
   
-  levelplot(t(Final_O[nrow(Final_O):1,]),
-            col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
-            main = paste0("Results table ordered by block membership for season: ", season), scales = list(alternating=1),
-            panel = function(...){
-              panel.levelplot(...)
-              panel.abline(h = (20-how_many_top)+0.5)
-              panel.abline(v = how_many_top+0.5)
-            })
+  print(levelplot(t(Final_O[nrow(Final_O):1,]),
+                  col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
+                  main = list(paste0("Results table ordered by block membership for season: ",
+                                     season), cex= 2), 
+                  scales = list(list(alternating=1), x=list(cex=1),y=list(cex=1.4)),
+                  panel = function(...){
+                    panel.levelplot(...)
+                    panel.abline(h = (20-how_many_top)+0.5, lw = 2.5)
+                    panel.abline(v = how_many_top+0.5, lw =2.5)
+                  }))
   
   # save it in folder
   pdf(paste0("Inference_results//mcmc_Premier_Season_",season,
@@ -532,13 +538,14 @@ if (K_estimated>1){
   
   print(levelplot(t(Final_O[nrow(Final_O):1,]),
                   col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
-                  main = paste0("Results table ordered by block membership for season: ", season), scales = list(alternating=1),
+                  main = list(paste0("Results table ordered by block membership for season: ",
+                                     season), cex= 2), 
+                  scales = list(list(alternating=1), x=list(cex=1),y=list(cex=1.4)),
                   panel = function(...){
                     panel.levelplot(...)
                     panel.abline(h = (20-how_many_top)+0.5, lw = 2.5)
                     panel.abline(v = how_many_top+0.5, lw =2.5)
                   }))
-  
   dev.off()
 }
 
@@ -546,5 +553,4 @@ if (K_estimated>1){
 save.image(paste0("Inference_results//mcmc_Premier_Season_",season,
                   "//WS_Premier_Season_", season, "_", (S-burn_in_level)/1000,
                   "k_seed_",my_seed,".RData"))
-
 

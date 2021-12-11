@@ -1,0 +1,31 @@
+% latex table generated in R 3.6.3 by xtable 1.8-4 package
+% Sat Dec 11 13:25:33 2021
+\begin{table}[ht]
+\centering
+\begin{tabular}{rr}
+  \hline
+ & x \\ 
+  \hline
+Manchester City & 98 \\ 
+  Liverpool & 97 \\ 
+  Chelsea & 72 \\ 
+  Tottenham Hotspur & 71 \\ 
+  Arsenal & 70 \\ 
+  Manchester United & 66 \\ 
+  Wolverhampton Wanderers & 57 \\ 
+  Everton & 54 \\ 
+  Leicester City & 52 \\ 
+  West Ham United & 52 \\ 
+  Watford & 50 \\ 
+  Crystal Palace & 49 \\ 
+  Bournemouth & 45 \\ 
+  Newcastle United & 45 \\ 
+  Burnley & 40 \\ 
+  Southampton & 39 \\ 
+  Brighton \& Hove Albion & 36 \\ 
+  Cardiff City & 34 \\ 
+  Fulham & 26 \\ 
+  Huddersfield Town & 16 \\ 
+   \hline
+\end{tabular}
+\end{table}
