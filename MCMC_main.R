@@ -26,7 +26,7 @@
 #cat("\014")
 
 ## Choose Premier Season
-#season<-"2021"
+season<-"2021"
   
 ####################################################################################
 
@@ -44,9 +44,23 @@ source("READ_TABLE_RESULTS.R")
 library("lattice")
 palf <-colorRampPalette(c("green3", "yellow", "red1"))
 
+# option to print season with 4 figures
+year1 = substr(season, 1, 2)
+year2 = substr(season, 3, 4)
+if((year1)>20){
+  year1<-as.character(paste0("19",year1))
+}else{
+  year1<-as.character(paste0("20",year1))
+}
+if((year2)==0){
+  year2
+  year2<-as.character(paste0("200",year2))
+}
+season_lab = paste0(year1, "/",year2) 
+
 print(levelplot(t(O[nrow(O):1,]),
                 col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
-                main =  list(label=paste0("Results table season: ", season), cex=2.4),
+                main =  list(label=paste0("Results table season: ", season_lab), cex=2.4),
                 scales = list(list(alternating=1), x=list(cex=1),y=list(cex=1.4)),
 ))
 
@@ -57,7 +71,7 @@ pdf(paste0("Inference_results//mcmc_Premier_Season_",season,
 
 print(levelplot(t(O[nrow(O):1,]),
                 col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
-                main =  list(label=paste0("Results table season: ", season), cex=2.4),
+                main =  list(label=paste0("Results table season: ", season_lab), cex=2.4),
                 scales = list(list(alternating=1), x=list(cex=1),y=list(cex=1.4)),
                 ))
 
@@ -539,7 +553,7 @@ if (K_estimated>1){
   print(levelplot(t(Final_O[nrow(Final_O):1,]),
                   col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
                   main = list(paste0("Results table ordered by block membership for season: ",
-                                     season), cex= 2), 
+                                     season_lab), cex= 1.9), 
                   scales = list(list(alternating=1), x=list(cex=1),y=list(cex=1.4)),
                   panel = function(...){
                     panel.levelplot(...)
