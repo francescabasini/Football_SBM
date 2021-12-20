@@ -26,7 +26,7 @@
 #cat("\014")
 
 ## Choose Premier Season
-season<-"2021"
+#season<-"2021"
   
 ####################################################################################
 
@@ -61,7 +61,7 @@ season_lab = paste0(year1, "/",year2)
 print(levelplot(t(O[nrow(O):1,]),
                 col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
                 main =  list(label=paste0("Results table season: ", season_lab), cex=2.4),
-                scales = list(list(alternating=1), x=list(cex=1),y=list(cex=1.4)),
+                scales = list(list(alternating=1), x=list(cex=1),y=list(cex=0.8)),
 ))
 
 
@@ -72,7 +72,7 @@ pdf(paste0("Inference_results//mcmc_Premier_Season_",season,
 print(levelplot(t(O[nrow(O):1,]),
                 col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
                 main =  list(label=paste0("Results table season: ", season_lab), cex=2.4),
-                scales = list(list(alternating=1), x=list(cex=1),y=list(cex=1.4)),
+                scales = list(list(alternating=1), x=list(cex=1),y=list(cex=0.8)),
                 ))
 
 dev.off()
@@ -539,7 +539,7 @@ if (K_estimated>1){
                   col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
                   main = list(paste0("Results table ordered by block membership for season: ",
                                      season), cex= 2), 
-                  scales = list(list(alternating=1), x=list(cex=1),y=list(cex=1.4)),
+                  scales = list(list(alternating=1), x=list(cex=1),y=list(cex=0.8)),
                   panel = function(...){
                     panel.levelplot(...)
                     panel.abline(h = (20-how_many_top)+0.5, lw = 2.5)
@@ -554,7 +554,7 @@ if (K_estimated>1){
                   col.regions=palf(100), xlab = NULL, ylab = NULL, colorkey = FALSE,
                   main = list(paste0("Results table ordered by block membership for season: ",
                                      season_lab), cex= 1.9), 
-                  scales = list(list(alternating=1), x=list(cex=1),y=list(cex=1.4)),
+                  scales = list(list(alternating=1), x=list(cex=1),y=list(cex=0.8)),
                   panel = function(...){
                     panel.levelplot(...)
                     panel.abline(h = (20-how_many_top)+0.5, lw = 2.5)

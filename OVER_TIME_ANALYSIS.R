@@ -55,10 +55,12 @@ all_seasons = FALSE
 
 for(yy in 1:length(updated_season_numbers)){
   season = updated_season_numbers[yy]
+  all_seasons = TRUE
   if (all_seasons){
     load(paste0("Inference_results//mcmc_Premier_Season_",season,
                 "//WS_Premier_Season_",season,"_200k_seed_1909.RData"))
   }else{
+    all_seasons = FALSE
     source("MCMC_main.R")
     
   }
@@ -162,7 +164,7 @@ for (yy in 1:length(season_numbers)){
 
 # Probability of Top block for each Championship Over time (Figure 6)
 ####################################################################################
-greyscale_plot = TRUE
+greyscale_plot = FALSE
 put_title = FALSE
 
 balance_or_not = apply(posterior_k_matrix, MARGIN = 1, FUN = function(x) which.max(x))
@@ -307,8 +309,6 @@ ytop_BALANCE<-ifelse(balance_or_not==1, 1.05, 0)
 ytop_UNBALANCE<-ifelse(balance_or_not!=1, 1.05, 0)
 
 ## 2/12/21 - creating a parameter for greyscale
-
-greyscale_plot = TRUE
 
 # Creating a separate directory inside "OVER TIME" for all the figures for each team
 folder_path_OVER_for_TEAMS = paste0(folder_path_OVER, "//Over_time_Teams")
