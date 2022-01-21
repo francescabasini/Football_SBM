@@ -567,4 +567,3 @@ if (K_estimated>1){
 save.image(paste0("Inference_results//mcmc_Premier_Season_",season,
                   "//WS_Premier_Season_", season, "_", (S-burn_in_level)/1000,
                   "k_seed_",my_seed,".RData"))
-

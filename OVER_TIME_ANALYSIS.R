@@ -55,10 +55,10 @@ all_seasons = FALSE
 
 for(yy in 1:length(updated_season_numbers)){
   season = updated_season_numbers[yy]
-  all_seasons = TRUE
   if (all_seasons){
     load(paste0("Inference_results//mcmc_Premier_Season_",season,
                 "//WS_Premier_Season_",season,"_200k_seed_1909.RData"))
+    all_seasons = TRUE
   }else{
     all_seasons = FALSE
     source("MCMC_main.R")
