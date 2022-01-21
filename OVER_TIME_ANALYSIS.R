@@ -47,11 +47,11 @@ updated_season_numbers = season_numbers
 
 posterior_list = vector(mode = "list", length = length(season_numbers))
 
-# If you just want to run the analysis but you already have all season's results
+# If you just want to run the summary analysis but you already have all season's results
 # you can put TRUE to the following code line, else put FALSE and run the analyses
 ############################################################################
 # 2/12/21
-all_seasons = FALSE
+all_seasons = TRUE
 
 for(yy in 1:length(updated_season_numbers)){
   season = updated_season_numbers[yy]
@@ -198,7 +198,14 @@ if (put_title)
 title("Posterior probabilities of belonging to the top block over time")
 title(ylab = "P(top block)", cex.lab = 2.5,
       line = 4)
-axis(1, at=1:length(season_numbers), labels=season_labels, cex.axis = 2)
+axis(1, at=1:length(season_numbers), labels=FALSE, cex.axis = 2)
+# know it is every 5
+selection_points= rep(1, (as.integer(length(season_numbers))/3))+(0:((as.integer(length(season_numbers))/3)-1))*4
+axis(1, at=(1:length(season_numbers))[selection_points],
+     labels=season_labels[selection_points], cex.axis = 2, lwd.ticks = 4, tck = 0.01)
+selection_points= rep(1, (as.integer(length(season_numbers))/3))+(0:((as.integer(length(season_numbers))/3)-1))*4
+axis(1, at=(1:length(season_numbers))[selection_points],
+     labels=season_labels[selection_points], cex.axis = 2, lwd.ticks = 4, tck = -0.01)
 for (yy in 1:length(season_numbers)){
   season = season_numbers[yy]
   current_p_top = get(paste0("P_top_block_season", season))/100
@@ -248,6 +255,13 @@ title(ylab = "Number of teams in top block", cex.lab = 2.5,
       line = 4)
 grid(nx=NA, ny=NULL)
 axis(1, at=bp, labels=season_labels, cex.axis = 2)
+# know it is every 5
+selection_points= rep(1, (as.integer(length(season_numbers))/3))+(0:((as.integer(length(season_numbers))/3)-1))*4
+axis(1, at=bp[selection_points],
+     labels=season_labels[selection_points], cex.axis = 2, lwd.ticks = 4, tck = 0.01)
+selection_points= rep(1, (as.integer(length(season_numbers))/3))+(0:((as.integer(length(season_numbers))/3)-1))*4
+axis(1, at=bp[selection_points],
+     labels=season_labels[selection_points], cex.axis = 2, lwd.ticks = 4, tck = -0.01)
 # Add numbers
 text(x = bp, y = how_many_on_top, label = how_many_on_top, pos = 3, cex = 2, col = "black")
 dev.off()
@@ -341,7 +355,7 @@ for(tt in 1:length(All_teams_labs)){
   title(ylab = "Pr(strong cluster)", cex.lab = 2.5,
         line = 3)
   axis(1, at=seq(2,length(season_labels),by=3), labels=season_labels[seq(2, length(season_labels), by=3)],
-       cex.axis = 2)
+       cex.axis = 2, lwd.ticks = 2)
   axis(2, at=seq(0,1, by=0.2), labels=seq(0,1, by=0.2),
        cex.axis = 2)
   # Adding balance bars
