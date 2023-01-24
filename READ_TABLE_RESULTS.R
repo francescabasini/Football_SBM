@@ -15,8 +15,8 @@ N<-dim(Results)[1]
 O<-matrix(NA,N,N)
 for(i in 1:N){
   for(j in 1:N){
-    # 18/05 adjustment
-    if(i==j | Results[i,j]=="~"){
+    # 18/05 adjustment for misssing matches
+    if(i==j | Results[i,j]==""){
       O[i,j]=NA
     }else{
       b=as.character(Results[i,j])
@@ -80,3 +80,4 @@ O_value=O
 O_value<-ifelse(O==1, "W", ifelse(O==2, "D", "L"))
 
 O_value
+
