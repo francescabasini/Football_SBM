@@ -15,7 +15,8 @@ N<-dim(Results)[1]
 O<-matrix(NA,N,N)
 for(i in 1:N){
   for(j in 1:N){
-    if(i==j){
+    # 18/05 adjustment
+    if(i==j | Results[i,j]=="~"){
       O[i,j]=NA
     }else{
       b=as.character(Results[i,j])
@@ -48,15 +49,20 @@ to_adjacency<-function(O_matrix){
     for(j in 1:N_nodes){
       #do not consider self loops
       if(i!=j){
-        #value 1 for W
-        if(O_matrix[i,j]==1)
-          adja_y[i,j,]=c(1,0,0)
-        #Draw
-        if(O_matrix[i,j]==2)
-          adja_y[i,j,]=c(0,1,0)
-        #Loss
-        if(O_matrix[i,j]==3)
-          adja_y[i,j,]=c(0,0,1)
+        # 18/05/22 not considering NAs
+        if(is.na(O_matrix[i,j]))
+           adja_y[i,j,]=c(0,0,0)
+        else{
+          #value 1 for W
+          if(O_matrix[i,j]==1)
+            adja_y[i,j,]=c(1,0,0)
+          #Draw
+          if(O_matrix[i,j]==2)
+            adja_y[i,j,]=c(0,1,0)
+          #Loss
+          if(O_matrix[i,j]==3)
+            adja_y[i,j,]=c(0,0,1)
+        }
       }
     }
   }

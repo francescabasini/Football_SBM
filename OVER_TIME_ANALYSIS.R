@@ -4,7 +4,7 @@
 
 # RUN THE ANALYSIS FOR ALL SEASONS IN THE DATA FOLDER
 ####################################################################################
-years = c(78:99, 0:21) # now 21 because of the new season addition
+years = c(78:99, 0:22) # now 22 because of the new season addition
 season_labels = c(0)
 season_numbers = c(0)
 for(yy in 1:(length(years)-1)){
@@ -22,7 +22,7 @@ for(yy in 1:(length(years)-1)){
   # new line 2/12/2021
   # adjust for labels to include 4 figures
   
-  if((year1)>20){
+  if((year1)>21){
     year1<-as.character(paste0("19",year1))
   }else{
     year1<-as.character(paste0("20",year1))
@@ -51,11 +51,12 @@ posterior_list = vector(mode = "list", length = length(season_numbers))
 # you can put TRUE to the following code line, else put FALSE and run the analyses
 ############################################################################
 # 2/12/21
-all_seasons = TRUE
+all_seasons = FALSE
 
 for(yy in 1:length(updated_season_numbers)){
   season = updated_season_numbers[yy]
   if (all_seasons){
+    print(season)
     load(paste0("Inference_results//mcmc_Premier_Season_",season,
                 "//WS_Premier_Season_",season,"_200k_seed_1909.RData"))
     all_seasons = TRUE
@@ -66,24 +67,21 @@ for(yy in 1:length(updated_season_numbers)){
   }
   posterior_list[[yy]] = posterior_k
   rm(list=setdiff(ls(), c("updated_season_labels","updated_season_numbers", "posterior_list", "all_seasons")))
+  #updated_season_numbers = c(updated_season_numbers, "2122") #26/05/22
+  #updated_season_labels = c(updated_season_labels, "2021/22")
   #cat("\014")
 }
 
 season_labels = updated_season_labels
 season_numbers = updated_season_numbers
+
+#season_labels = season_labels[-length(season_labels)]
+#season_numbers = season_numbers[-length(season_labels)]
+
 ############################################################################
 
 
-#new folder path
-folder_path_OVER = "Inference_results//mcmc_Premier_OVER_TIME_ANALYSIS"
-# Create OVER_TIME_ANALYSIS directory insinde "Inference_results" folder
-dir.create(folder_path_OVER)
-# Saving the posterior of K on a separate WorkSpace inside "OVER_TIME_ANALYSIS" folder
-save.image(paste0(folder_path_OVER, "//mcmc_Premier_OVER_TIME.RData"))
-#load(paste0("Inference_results//mcmc_Premier_OVER_TIME_ANALYSIS//mcmc_Premier_OVER_TIME.RData"))
-
-
-  # Print Posterior of K table
+# Print Posterior of K table
 ####################################################################################
 library(xtable)
 
@@ -114,7 +112,21 @@ row.names(posterior_k_matrix) = season_labels
 # into x table
 posterior_k_matrix_table<-xtable(posterior_k_matrix, digits = 2)
 print.xtable(posterior_k_matrix_table, type="latex", file=paste0(folder_path_OVER,
-                                                        "//Posterior_K_table_OVER_TIME.txt"))
+                                                                 "//Posterior_K_table_OVER_TIME.txt"))
+
+#new folder path
+folder_path_OVER = "Inference_results//mcmc_Premier_OVER_TIME_ANALYSIS"
+# Create OVER_TIME_ANALYSIS directory insinde "Inference_results" folder
+dir.create(folder_path_OVER)
+# Saving the posterior of K on a separate WorkSpace inside "OVER_TIME_ANALYSIS" folder
+save.image(paste0(folder_path_OVER, "//mcmc_Premier_OVER_TIME.RData"))
+
+#####################################
+######### START HERE ################
+
+
+#load(paste0("Inference_results//mcmc_Premier_OVER_TIME_ANALYSIS//mcmc_Premier_OVER_TIME.RData"))
+
 ####################################################################################
 
 
@@ -136,7 +148,11 @@ for (yy in 1:length(season_numbers)){
   load(paste0("Inference_results//mcmc_Premier_Season_",season,
               "//WS_Premier_Season_", season, "_", (S-burn_in_level)/1000,
               "k_seed_",my_seed,".RData"))
+  
   # adjust labels
+  #updated_season_numbers = c(updated_season_numbers, "2122") #26/05/22
+  #updated_season_labels = c(updated_season_labels, "2021/22")
+  
   season_numbers = updated_season_numbers
   season_labels = updated_season_labels
   #------------------
@@ -154,7 +170,7 @@ for (yy in 1:length(season_numbers)){
     p_top_block_k = current_clust_model[winner_lab_model,]*(posterior_k[kk]/100)
     P_top[,kk] = p_top_block_k
   }
- # sum over
+  # sum over
   p_top_over_k = t(as.matrix(rowSums(P_top)))
   colnames(p_top_over_k) = colnames(O)
   row.names(p_top_over_k) = season
@@ -195,7 +211,7 @@ if ((length(season_points) %% 2) == 0){
        cex.main = 3,xaxt="n", las = 1, cex.axis = 2, cex.lab = 2)
 }
 if (put_title)
-title("Posterior probabilities of belonging to the top block over time")
+  title("Posterior probabilities of belonging to the top block over time")
 title(ylab = "P(top block)", cex.lab = 2.5,
       line = 4)
 axis(1, at=1:length(season_numbers), labels=FALSE, cex.axis = 2)
@@ -209,11 +225,12 @@ axis(1, at=(1:length(season_numbers))[selection_points],
 for (yy in 1:length(season_numbers)){
   season = season_numbers[yy]
   current_p_top = get(paste0("P_top_block_season", season))/100
-
+  
   x_vals = rep(yy, length(current_p_top))
   x_jitt = rnorm(length(x_vals), 0, 0.1)
   y_jitt= rnorm(length(current_p_top), 0, 0.01)
-  points(x_vals+x_jitt, current_p_top+y_jitt, cex = 1.35, pch = 21, col = "black", bg = colour_bean[yy])
+  points(x_vals+x_jitt, current_p_top+y_jitt, cex = 1.35, pch = 21,
+         col = "black", bg = colour_bean[yy])
   # adding mean
   #lines(c(seas-0.4, seas +0.4), rep(mean(probs_top),2), lwd = 2.5)
 }
@@ -247,10 +264,10 @@ if (greyscale_plot){
 
 par(mar = c(5,9,4,2) + 0.1) ## default is c(5,4,4,2) + 0.1
 bp  =barplot(how_many_on_top, xlab = "Season",
-              col = colour_bean, ylim = c(0, max(how_many_on_top)+1.5),
+             col = colour_bean, ylim = c(0, max(how_many_on_top)+1.5),
              cex.main = 3,xaxt="n", las = 1, cex.axis = 2, cex.lab = 2.5, yline = 5)
 if (put_title){
-title(main= "Size of top block over seasons")}
+  title(main= "Size of top block over seasons")}
 title(ylab = "Number of teams in top block", cex.lab = 2.5,
       line = 4)
 grid(nx=NA, ny=NULL)
@@ -275,7 +292,7 @@ rownames(top_block_size_table) = season_labels
 colnames(top_block_size_table) = "Size of Top Block"
 top_block_size_table_table<-xtable(top_block_size_table, digits = 0)
 print.xtable(top_block_size_table_table, type="latex", file=paste0(folder_path_OVER,
-                                                                 "//Size_top_block_table.txt"))
+                                                                   "//Size_top_block_table.txt"))
 
 ####################################################################################
 
@@ -391,9 +408,10 @@ for(tt in 1:length(All_teams_labs)){
 save.image(paste0(folder_path_OVER, "//mcmc_Premier_OVER_TIME.RData"))
 
 
-# Print P(Top block) as xtable for season 18/19 (Paper) --> Now 20/21
+# Print P(Top block) as xtable for season 18/19 (Paper) --> Now 20/21 --> Now 21/22
 ####################################################################################
-# print.xtable(xtable(t(P_top_block_season2021)), type="latex", file=paste0("Inference_results",
-#                                                                   "//P_top_block_2021.txt"))
- 
+
+print.xtable(xtable(t(P_top_block_season2122)), type="latex", file=paste0("Inference_results",
+                                                                          "//P_top_block_2122.txt"))
+
 
