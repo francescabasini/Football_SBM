@@ -1,6 +1,6 @@
-# Football_SBM (2021)
+# Football_SBM
 
-This repository contains the data and code associated with the paper -
+This repository contains the data and code associated with the paper: \
 "**F. Basini**, V. Tsouli, I. Ntzoufras, N. Friel, [Assessing competitive balance in the English Premier League for over forty seasons using a stochastic block model](https://academic.oup.com/jrsssa/advance-article/doi/10.1093/jrsssa/qnad007/7035692), *Journal of the Royal Statistical Society Series A: Statistics in Society*, 2023".
 
 ## Repository structure:  
